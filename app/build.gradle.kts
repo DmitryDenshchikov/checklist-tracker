@@ -6,8 +6,11 @@ plugins {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.flywaydb:flyway-core:9.21.1")
+    implementation("org.postgresql:postgresql:42.6.0")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
