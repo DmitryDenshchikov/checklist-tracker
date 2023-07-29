@@ -5,12 +5,18 @@ plugins {
 }
 
 dependencies {
+    val exposedVersion: String by project
+    val flywayVersion: String by project
+    val psqlVersion: String by project
+
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.flywaydb:flyway-core:9.21.1")
-    implementation("org.postgresql:postgresql:42.6.0")
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+    implementation("org.flywaydb:flyway-core:$flywayVersion")
+    implementation("org.postgresql:postgresql:$psqlVersion")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
