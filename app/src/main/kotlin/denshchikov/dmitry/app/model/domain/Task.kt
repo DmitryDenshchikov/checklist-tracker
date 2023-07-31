@@ -1,5 +1,7 @@
 package denshchikov.dmitry.app.model.domain
 
+import org.jetbrains.exposed.sql.Table
+
 class Task(
     title: String,
     val description: String,
@@ -28,4 +30,12 @@ class Task(
         return result
     }
 
+}
+
+object Tasks : Table("task") {
+    val title = varchar("title", 255)
+    val description = varchar("description", 255)
+    val isCompleted = bool("is_completed")
+
+    override val primaryKey = PrimaryKey(title, description)
 }
