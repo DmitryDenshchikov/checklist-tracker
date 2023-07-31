@@ -1,3 +1,5 @@
 package denshchikov.dmitry.app.model.domain
 
-interface Completable
+interface Completable {
+    val isCompleted: Boolean
+}

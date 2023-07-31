@@ -1,0 +1,2 @@
+ALTER TABLE task ADD COLUMN id uuid NOT NULL;
+ALTER TABLE task ADD UNIQUE (id);
