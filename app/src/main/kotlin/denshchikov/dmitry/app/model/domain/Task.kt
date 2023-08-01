@@ -1,31 +1,20 @@
 package denshchikov.dmitry.app.model.domain
 
-class Task(
-    title: String,
+import org.jetbrains.exposed.sql.Table
+import java.util.*
+
+data class Task(
+    override val id: UUID,
+    override val title: String,
     val description: String,
-    val isCompleted: Boolean = false
-) : Item(title), Completable {
+    override val isCompleted: Boolean = false,
+) : Item, Completable
 
-    override fun toString(): String {
-        return "Task(title='$title', description='$description', isCompleted=$isCompleted)"
-    }
+object Tasks : Table("task") {
+    val id = uuid("id")
+    val title = varchar("title", 255)
+    val description = varchar("description", 255)
+    val isCompleted = bool("is_completed")
 
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is Task) return false
-        if (!super.equals(other)) return false
-
-        if (description != other.description) return false
-        if (isCompleted != other.isCompleted) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = super.hashCode()
-        result = 31 * result + description.hashCode()
-        result = 31 * result + isCompleted.hashCode()
-        return result
-    }
-
+    override val primaryKey = PrimaryKey(title, description)
 }

@@ -1,3 +1,8 @@
 package denshchikov.dmitry.app.model.domain
 
-open class Item(val title: String)
+import java.util.*
+
+interface Item {
+    val id: UUID?
+    val title: String
+}
