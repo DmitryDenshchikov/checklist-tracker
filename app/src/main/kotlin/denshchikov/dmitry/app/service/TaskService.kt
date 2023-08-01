@@ -5,6 +5,8 @@ import java.util.*
 
 interface TaskService {
 
-    fun createTask(task: Task): UUID
+    fun createTask(task: Task): Task
+
+    fun completeTask(id: UUID): Task
 
 }
