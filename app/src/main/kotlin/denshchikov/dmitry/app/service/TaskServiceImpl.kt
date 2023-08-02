@@ -14,8 +14,11 @@ class TaskServiceImpl(val dao: TaskDAOImpl) : TaskService {
 
     override fun completeTask(id: UUID): Task {
         return dao.get(id).copy(isCompleted = true).let {
-            dao.update(it)
-            it
+            if (dao.update(it)) {
+                it
+            } else {
+                throw RuntimeException("Couldn't update task $id")
+            }
         }
     }
 
