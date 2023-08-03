@@ -1,0 +1,6 @@
+app:
+  client:
+    id: ${CLIENT_ID}
+    secret: ${CLIENT_SECRET}
+server:
+  port: 9000
