@@ -45,7 +45,7 @@ class AuthorizationServerConfig {
             .clientSecret(secret)
             .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
             .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-            .scope("read")
+            .scope("tasks.create")
             .build()
         return InMemoryRegisteredClientRepository(registeredClient)
     }
