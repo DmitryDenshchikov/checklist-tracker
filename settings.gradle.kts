@@ -4,3 +4,4 @@ plugins {
 
 rootProject.name = "checklist-tracker"
 include("app")
+include("auth-server")

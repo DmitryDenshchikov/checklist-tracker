@@ -4,3 +4,10 @@ app:
     url: jdbc:postgresql://localhost:5432/${DATABASE_NAME}
     username: ${DATABASE_USER_NAME}
     password: ${DATABASE_USER_PASSWORD}
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000
