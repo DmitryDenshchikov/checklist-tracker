@@ -8,18 +8,18 @@ import java.util.*
 @Component
 class TaskServiceImpl(val dao: TaskDAOImpl) : TaskService {
 
-    override fun createTask(task: Task): Task {
-        return dao.create(task)
-    }
+    override fun createTask(task: Task) = dao.create(task)
 
-    override fun completeTask(id: UUID): Task {
-        return dao.get(id).copy(isCompleted = true).let {
-            if (dao.update(it)) {
-                it
-            } else {
-                throw RuntimeException("Couldn't update task $id")
-            }
+    override fun completeTask(id: UUID) = dao.get(id).copy(isCompleted = true).let {
+        if (dao.update(it)) {
+            it
+        } else {
+            throw RuntimeException("Couldn't update task $id")
         }
     }
+
+    override fun getAllTasks(): List<Task> = dao.get()
+
+    override fun getTask(id: UUID) = dao.get(id)
 
 }

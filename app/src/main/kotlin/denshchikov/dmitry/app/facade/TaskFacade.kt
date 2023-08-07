@@ -10,4 +10,8 @@ interface TaskFacade {
 
     fun completeTask(id: UUID): TaskResponse
 
+    fun getAllTasks(): List<TaskResponse>
+
+    fun getTask(id: UUID): TaskResponse
+
 }

@@ -9,4 +9,8 @@ interface TaskService {
 
     fun completeTask(id: UUID): Task
 
+    fun getAllTasks(): List<Task>
+
+    fun getTask(id: UUID): Task
+
 }
