@@ -8,4 +8,6 @@ interface DAO<T, K> {
 
     fun get(id: T): K
 
+    fun get(): List<K>
+
 }
