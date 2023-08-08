@@ -7,7 +7,7 @@ interface TaskService {
 
     fun createTask(task: Task): Task
 
-    fun completeTask(id: UUID): Task
+    fun updateTask(task: Task): Task
 
     fun getAllTasks(): List<Task>
 

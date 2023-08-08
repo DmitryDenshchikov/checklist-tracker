@@ -8,5 +8,4 @@ data class CreateTaskRequest(
     val description: String
 )
 
-fun CreateTaskRequest.toTask() = Task(UUID.randomUUID(), title, description)
-
+fun UpdateTaskRequest.toTask() = Task(UUID.randomUUID(), title, description)

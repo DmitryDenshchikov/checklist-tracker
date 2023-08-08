@@ -10,12 +10,9 @@ class TaskServiceImpl(val dao: TaskDAOImpl) : TaskService {
 
     override fun createTask(task: Task) = dao.create(task)
 
-    override fun completeTask(id: UUID) = dao.get(id).copy(isCompleted = true).let {
-        if (dao.update(it)) {
-            it
-        } else {
-            throw RuntimeException("Couldn't update task $id")
-        }
+    override fun updateTask(task: Task) = when (dao.update(task)) {
+        true -> task
+        else -> throw RuntimeException("Couldn't update task $task")
     }
 
     override fun getAllTasks(): List<Task> = dao.get()
