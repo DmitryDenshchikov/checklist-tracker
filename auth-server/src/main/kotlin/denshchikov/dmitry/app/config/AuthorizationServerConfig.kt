@@ -1,4 +1,4 @@
-package denshchikov.dmitry.config
+package denshchikov.dmitry.app.config
 
 
 import com.nimbusds.jose.jwk.JWKSet

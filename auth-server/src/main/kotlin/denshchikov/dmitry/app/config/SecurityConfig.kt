@@ -1,4 +1,4 @@
-package denshchikov.dmitry.config
+package denshchikov.dmitry.app.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

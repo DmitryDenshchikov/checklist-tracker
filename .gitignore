@@ -30,3 +30,6 @@ replay_pid*
 build
 
 .idea
+
+*.crt
+*.p12

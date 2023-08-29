@@ -28,3 +28,7 @@ tasks.withType<KotlinCompile> {
 application {
     mainClass.set("denshchikov.dmitry.app.AppKt")
 }
+
+tasks.getByName<Jar>("jar") {
+    enabled = false
+}
