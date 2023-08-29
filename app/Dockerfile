@@ -31,4 +31,6 @@ ARG auth_server_url
 ENV AUTH_SERVER_URL $auth_server_url
 
 EXPOSE 8443
-ENTRYPOINT java -jar /app/app.jar
+
+RUN keytool -srcstorepass ${KEY_STORE_PASSWORD} -storepass ${KEY_STORE_PASSWORD} -v -importkeystore -srckeystore ${KEY_STORE_PATH} -srcstoretype PKCS12 -destkeystore /opt/java/openjdk/lib/security/cacerts -deststoretype JKS
+CMD java -jar /app/app.jar

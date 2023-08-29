@@ -6,6 +6,7 @@ import com.nimbusds.jose.jwk.RSAKey
 import com.nimbusds.jose.jwk.source.JWKSource
 import com.nimbusds.jose.proc.SecurityContext
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.Ordered
@@ -51,7 +52,11 @@ class AuthorizationServerConfig {
     }
 
     @Bean
-    fun providerSettings(): AuthorizationServerSettings = AuthorizationServerSettings.builder().build()
+    fun providerSettings(
+        @Value("\${app.issuer-url}") issuerUrl: String
+    ): AuthorizationServerSettings = AuthorizationServerSettings.builder()
+        .issuer(issuerUrl)
+        .build()
 
     private fun generateRsa(): RSAKey {
         val keyPair = generateRsaKey()

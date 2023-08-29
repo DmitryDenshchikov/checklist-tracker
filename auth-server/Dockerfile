@@ -3,6 +3,9 @@ FROM eclipse-temurin:17-jdk
 COPY ./build/libs /app
 COPY ./cert /app
 
+ARG issuer_url
+ENV ISSUER_URL $issuer_url
+
 ARG key_alias
 ENV KEY_ALIAS $key_alias
 
