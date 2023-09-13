@@ -1,5 +1,6 @@
 package denshchikov.dmitry.app.facade
 
+import denshchikov.dmitry.app.model.request.CreateTaskRequest
 import denshchikov.dmitry.app.model.request.UpdateTaskRequest
 import denshchikov.dmitry.app.model.request.toTask
 import denshchikov.dmitry.app.model.response.toTaskResponse
@@ -10,7 +11,7 @@ import java.util.*
 @Component
 class TaskFacadeImpl(val service: TaskService) : TaskFacade {
 
-    override fun createTask(req: UpdateTaskRequest) = req.toTask().let {
+    override fun createTask(req: CreateTaskRequest) = req.toTask().let {
         service.createTask(it).toTaskResponse()
     }
 

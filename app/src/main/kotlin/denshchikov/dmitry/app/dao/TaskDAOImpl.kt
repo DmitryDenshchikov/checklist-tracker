@@ -17,6 +17,7 @@ class TaskDAOImpl : DAO<UUID, Task> {
                 it[title] = task.title
                 it[description] = task.description
                 it[isCompleted] = task.isCompleted
+                it[expirationDate] = task.expirationDate
             }
             toTask(result.resultedValues!![0])
         }
@@ -29,6 +30,7 @@ class TaskDAOImpl : DAO<UUID, Task> {
                 it[title] = task.title
                 it[description] = task.description
                 it[isCompleted] = task.isCompleted
+                it[expirationDate] = task.expirationDate
             } > 0
         }
     }
@@ -56,7 +58,8 @@ class TaskDAOImpl : DAO<UUID, Task> {
         row[Tasks.id],
         row[Tasks.title],
         row[Tasks.description],
-        row[Tasks.isCompleted]
+        row[Tasks.isCompleted],
+        row[Tasks.expirationDate]
     )
 
 }

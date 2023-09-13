@@ -1,12 +1,13 @@
 package denshchikov.dmitry.app.facade
 
+import denshchikov.dmitry.app.model.request.CreateTaskRequest
 import denshchikov.dmitry.app.model.request.UpdateTaskRequest
 import denshchikov.dmitry.app.model.response.TaskResponse
 import java.util.*
 
 interface TaskFacade {
 
-    fun createTask(req: UpdateTaskRequest): TaskResponse
+    fun createTask(req: CreateTaskRequest): TaskResponse
 
     fun updateTask(id: UUID, req: UpdateTaskRequest): TaskResponse
 

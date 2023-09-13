@@ -1,0 +1,1 @@
+ALTER TABLE task ADD COLUMN expiration_date timestamp;
