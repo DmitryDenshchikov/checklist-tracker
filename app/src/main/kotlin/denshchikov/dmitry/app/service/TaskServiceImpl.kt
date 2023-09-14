@@ -15,8 +15,8 @@ class TaskServiceImpl(val dao: TaskDAOImpl) : TaskService {
         else -> throw RuntimeException("Couldn't update task $task")
     }
 
-    override fun getAllTasks(): List<Task> = dao.get()
+    override fun getAllTasks(createdBy: String): List<Task> = dao.get(createdBy)
 
-    override fun getTask(id: UUID) = dao.get(id)
+    override fun getTask(id: UUID, createdBy: String) = dao.get(id, createdBy)
 
 }

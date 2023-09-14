@@ -10,7 +10,8 @@ data class Task(
     override val title: String,
     val description: String,
     override val isCompleted: Boolean = false,
-    val expirationDate: Instant
+    val expirationDate: Instant,
+    val createdBy: String
 ) : Item, Completable
 
 object Tasks : Table("task") {
@@ -19,6 +20,7 @@ object Tasks : Table("task") {
     val description = varchar("description", 255)
     val isCompleted = bool("is_completed")
     val expirationDate = timestamp("expiration_date")
+    val createdBy = varchar("created_by", 255)
 
     override val primaryKey = PrimaryKey(title, description)
 }
