@@ -5,30 +5,34 @@ import denshchikov.dmitry.app.model.domain.Tasks
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.springframework.stereotype.Component
+import java.time.Instant
 import java.util.*
 
 @Component
-class TaskDAOImpl : DAO<UUID, Task> {
+class TaskDAOImpl : TaskDAO {
 
-    override fun create(task: Task): Task {
+    override fun create(entity: Task): Task {
         return transaction {
             val result = Tasks.insert {
-                it[id] = task.id
-                it[title] = task.title
-                it[description] = task.description
-                it[isCompleted] = task.isCompleted
+                it[id] = entity.id
+                it[title] = entity.title
+                it[description] = entity.description
+                it[isCompleted] = entity.isCompleted
+                it[expirationDate] = entity.expirationDate
+                it[createdBy] = entity.createdBy
             }
             toTask(result.resultedValues!![0])
         }
     }
 
-    override fun update(task: Task): Boolean {
+    override fun update(entity: Task): Boolean {
         return transaction {
-            Tasks.update({ Tasks.id eq task.id }) {
-                it[id] = task.id
-                it[title] = task.title
-                it[description] = task.description
-                it[isCompleted] = task.isCompleted
+            Tasks.update({ (Tasks.id eq entity.id) and (Tasks.createdBy eq entity.createdBy) }) {
+                it[id] = entity.id
+                it[title] = entity.title
+                it[description] = entity.description
+                it[isCompleted] = entity.isCompleted
+                it[expirationDate] = entity.expirationDate
             } > 0
         }
     }
@@ -51,12 +55,44 @@ class TaskDAOImpl : DAO<UUID, Task> {
         }
     }
 
+    override fun get(id: UUID, createdBy: String): Task {
+        return transaction {
+            Tasks.select {
+                (Tasks.id eq id) and (Tasks.createdBy eq createdBy)
+            }.single().let {
+                toTask(it)
+            }
+        }
+    }
+
+    override fun get(createdBy: String): List<Task> {
+        return transaction {
+            Tasks.select {
+                Tasks.createdBy eq createdBy
+            }.map {
+                toTask(it)
+            }
+        }
+    }
+
+    override fun getExpired(createdBy: String): List<Task> {
+        return transaction {
+            Tasks.select {
+                (Tasks.createdBy eq createdBy) and (Tasks.expirationDate less Instant.now()) and (not(Tasks.isCompleted))
+            }.map {
+                toTask(it)
+            }
+        }
+    }
+
 
     private fun toTask(row: ResultRow) = Task(
         row[Tasks.id],
         row[Tasks.title],
         row[Tasks.description],
-        row[Tasks.isCompleted]
+        row[Tasks.isCompleted],
+        row[Tasks.expirationDate],
+        row[Tasks.createdBy]
     )
 
 }

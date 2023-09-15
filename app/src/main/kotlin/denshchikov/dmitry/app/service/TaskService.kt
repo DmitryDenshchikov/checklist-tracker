@@ -9,8 +9,10 @@ interface TaskService {
 
     fun updateTask(task: Task): Task
 
-    fun getAllTasks(): List<Task>
+    fun getAllTasks(createdBy: String): List<Task>
 
-    fun getTask(id: UUID): Task
+    fun getTask(id: UUID, createdBy: String): Task
+
+    fun getExpired(createdBy: String): List<Task>
 
 }
