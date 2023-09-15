@@ -5,6 +5,7 @@ import denshchikov.dmitry.app.model.domain.Tasks
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.springframework.stereotype.Component
+import java.time.Instant
 import java.util.*
 
 @Component
@@ -68,6 +69,16 @@ class TaskDAOImpl : TaskDAO {
         return transaction {
             Tasks.select {
                 Tasks.createdBy eq createdBy
+            }.map {
+                toTask(it)
+            }
+        }
+    }
+
+    override fun getExpired(createdBy: String): List<Task> {
+        return transaction {
+            Tasks.select {
+                (Tasks.createdBy eq createdBy) and (Tasks.expirationDate less Instant.now()) and (not(Tasks.isCompleted))
             }.map {
                 toTask(it)
             }

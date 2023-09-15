@@ -22,6 +22,7 @@ class SecurityConfig {
                 .requestMatchers(POST, "/tasks").hasAuthority("SCOPE_tasks.create")
                 .requestMatchers(GET, "/tasks").hasAuthority("SCOPE_tasks.read")
                 .requestMatchers(GET, "/tasks/**").hasAuthority("SCOPE_tasks.read")
+                .requestMatchers( "/ws/notifications").hasAuthority("SCOPE_notifications.read")
         }.oauth2ResourceServer {
             it.jwt(withDefaults())
         }

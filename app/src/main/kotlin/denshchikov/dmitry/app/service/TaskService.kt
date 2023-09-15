@@ -13,4 +13,6 @@ interface TaskService {
 
     fun getTask(id: UUID, createdBy: String): Task
 
+    fun getExpired(createdBy: String): List<Task>
+
 }

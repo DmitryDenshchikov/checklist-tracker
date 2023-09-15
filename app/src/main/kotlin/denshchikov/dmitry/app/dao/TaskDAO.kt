@@ -9,4 +9,6 @@ interface TaskDAO : DAO<UUID, Task>{
 
     fun get(createdBy: String): List<Task>
 
+    fun getExpired(createdBy: String): List<Task>
+
 }

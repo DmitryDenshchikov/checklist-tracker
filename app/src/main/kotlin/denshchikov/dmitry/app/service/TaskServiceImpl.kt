@@ -19,4 +19,6 @@ class TaskServiceImpl(val dao: TaskDAOImpl) : TaskService {
 
     override fun getTask(id: UUID, createdBy: String) = dao.get(id, createdBy)
 
+    override fun getExpired(createdBy: String): List<Task> = dao.getExpired(createdBy)
+
 }
