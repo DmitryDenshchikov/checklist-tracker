@@ -1,14 +1,34 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("denshchikov.dmitry.kotlin-application-conventions")
+    val kotlinVersion = "1.9.10"
+
+    // kotlin
+    `kotlin-dsl`
+    kotlin("plugin.spring") version kotlinVersion
+    kotlin("jvm") version kotlinVersion
+
+    // jetbrains
+    id("org.jetbrains.kotlin.plugin.allopen") version kotlinVersion
+
+    // spring
+    id("org.springframework.boot") version "3.1.4"
+    id("io.spring.dependency-management") version "1.1.3"
 }
 
-dependencies {
-    val exposedVersion: String by project
-    val flywayVersion: String by project
-    val psqlVersion: String by project
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
 
+repositories {
+    mavenCentral()
+}
+
+val postgresqlVersion by extra("42.6.0")
+val exposedVersion by extra("0.41.1")
+val flywayVersion by extra("9.21.1")
+
+dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
@@ -20,7 +40,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
     implementation("org.flywaydb:flyway-core:$flywayVersion")
-    implementation("org.postgresql:postgresql:$psqlVersion")
+    implementation("org.postgresql:postgresql:$postgresqlVersion")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
@@ -32,8 +52,8 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-application {
-    mainClass.set("denshchikov.dmitry.app.AppKt")
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
 
 tasks.getByName<Jar>("jar") {
