@@ -13,4 +13,4 @@ data class UpdateTaskRequest(
 )
 
 fun UpdateTaskRequest.toTask(id: UUID, creator: String) =
-    Task(id, title, description, isCompleted, expirationDate, creator)
+    Task(id, title, description, expirationDate, creator, isCompleted)
