@@ -25,23 +25,27 @@ repositories {
 }
 
 val postgresqlVersion by extra("42.6.0")
-val exposedVersion by extra("0.41.1")
 val flywayVersion by extra("9.21.1")
 
 dependencies {
+    // Spring
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+
+    // Jackson
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
+
+    // Database
     implementation("org.flywaydb:flyway-core:$flywayVersion")
     implementation("org.postgresql:postgresql:$postgresqlVersion")
 
+    // JetBrains
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // Tests
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
