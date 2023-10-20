@@ -13,4 +13,4 @@ data class CreateTaskRequest(
 )
 
 fun CreateTaskRequest.toTask(creator: String) =
-    Task(UUID.randomUUID(), title, description, false, expirationDate, creator)
+    Task(UUID.randomUUID(), title, description, expirationDate, creator)

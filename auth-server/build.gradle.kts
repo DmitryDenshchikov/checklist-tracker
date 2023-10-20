@@ -27,14 +27,22 @@ repositories {
 val postgresqlVersion by extra("42.6.0")
 
 dependencies {
+    // Spring
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.security:spring-security-oauth2-authorization-server")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
-    implementation("org.postgresql:postgresql:$postgresqlVersion")
+
+    // Jackson
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    // Database
+    implementation("org.postgresql:postgresql:$postgresqlVersion")
+
+    // JetBrains
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+    // Tests
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
