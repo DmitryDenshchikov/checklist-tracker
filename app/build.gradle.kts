@@ -26,6 +26,7 @@ repositories {
 
 val postgresqlVersion by extra("42.6.0")
 val flywayVersion by extra("9.21.1")
+val apacheCommonsVersion by extra("3.13.0")
 
 dependencies {
     // Spring
@@ -44,6 +45,9 @@ dependencies {
 
     // JetBrains
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // Apache
+    implementation("org.apache.commons:commons-lang3:$apacheCommonsVersion")
 
     // Tests
     testImplementation("org.springframework.boot:spring-boot-starter-test")
