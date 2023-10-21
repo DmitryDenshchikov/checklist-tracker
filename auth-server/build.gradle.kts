@@ -3,9 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     val kotlinVersion = "1.9.10"
 
-    // gradle
-    `kotlin-dsl`
-
     // jetbrains
     kotlin("plugin.spring") version kotlinVersion
     kotlin("jvm") version kotlinVersion

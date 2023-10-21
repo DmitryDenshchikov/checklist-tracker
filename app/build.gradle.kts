@@ -3,9 +3,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     val kotlinVersion = "1.9.10"
 
-    // gradle
-    `kotlin-dsl`
-
     // jetbrains
     kotlin("plugin.spring") version kotlinVersion
     kotlin("jvm") version kotlinVersion
@@ -54,12 +51,6 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.testcontainers:postgresql")
     testImplementation("org.testcontainers:junit-jupiter")
-}
-
-configurations {
-    all {
-        exclude("org.springframework.boot", "spring-boot-starter-logging")
-    }
 }
 
 tasks.withType<KotlinCompile> {
