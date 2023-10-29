@@ -52,7 +52,7 @@ class TaskServiceImpl(val template: JdbcTemplate) : TaskService {
     override fun getExpired(createdBy: String): List<Task> {
         val timestamp = Timestamp.from(Instant.now())
         return template.query(
-            "SELECT * FROM task WHERE created_by = ? AND expiration_date < ?;",
+            "SELECT * FROM task WHERE created_by = ? AND is_completed = false AND expiration_date < ?;",
             rm, createdBy, timestamp
         )
     }

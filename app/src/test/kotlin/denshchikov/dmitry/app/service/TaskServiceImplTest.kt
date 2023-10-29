@@ -69,6 +69,21 @@ internal class TaskServiceImplTest : IntegrationTest {
     }
 
     @Test
+    fun should_ReturnNoExpiredTasks_When_TaskIsCompletedButDeadlinePassed() {
+        // Given
+        val task = randomCompletedTask()
+
+        // When
+        taskService.createTask(task)
+        Thread.sleep(1000)
+        val result = taskService.getExpired(testUser)
+
+        // Then
+        then(result)
+            .isEmpty()
+    }
+
+    @Test
     fun should_ReturnMultipleEntries_When_MultipleTasksCreated() {
         // Given
         val firstTask = randomTask()
@@ -94,6 +109,15 @@ internal class TaskServiceImplTest : IntegrationTest {
         randomAlphabetic(50),
         Instant.now(),
         testUser
+    )
+
+    private fun randomCompletedTask() = Task(
+        UUID.randomUUID(),
+        randomAlphabetic(10),
+        randomAlphabetic(50),
+        Instant.now(),
+        testUser,
+        true
     )
 
 }
