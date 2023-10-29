@@ -3,12 +3,6 @@ app:
 
 server:
   port: 9000
-  ssl:
-    key-store-type: PKCS12
-    key-store: ${KEY_STORE_PATH}
-    key-store-password: ${KEY_STORE_PASSWORD}
-    key-alias: ${KEY_ALIAS}
-    enabled: true
 
 spring:
   datasource:

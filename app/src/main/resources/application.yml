@@ -10,12 +10,3 @@ spring:
     username: ${DATABASE_USER_NAME}
     password: ${DATABASE_USER_PASSWORD}
     driver-class-name: org.postgresql.Driver
-
-server:
-  port: 8443
-  ssl:
-    key-store-type: PKCS12
-    key-store: ${KEY_STORE_PATH}
-    key-store-password: ${KEY_STORE_PASSWORD}
-    key-alias: ${KEY_ALIAS}
-    enabled: true
