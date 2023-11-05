@@ -1,4 +1,4 @@
-package denshchikov.dmitry.app.config
+package denshchikov.dmitry.app.ws
 
 import denshchikov.dmitry.app.service.TaskService
 import org.springframework.stereotype.Component
