@@ -1,20 +1,18 @@
 package denshchikov.dmitry.app.service
 
+import denshchikov.dmitry.app.TestDataProvider.randomCompletedTask
+import denshchikov.dmitry.app.TestDataProvider.randomTask
+import denshchikov.dmitry.app.TestDataProvider.testUser
 import denshchikov.dmitry.app.config.IntegrationTest
 import denshchikov.dmitry.app.model.domain.Task
-import org.apache.commons.lang3.RandomStringUtils.randomAlphabetic
 import org.assertj.core.api.BDDAssertions.then
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import java.time.Instant
-import java.util.*
 
 @SpringBootTest
 internal class TaskServiceImplTest : IntegrationTest {
-
-    val testUser = "test-user";
 
     @Autowired
     lateinit var taskService: TaskService
@@ -103,21 +101,5 @@ internal class TaskServiceImplTest : IntegrationTest {
             .containsExactlyInAnyOrder(firstId, secondId)
     }
 
-    private fun randomTask() = Task(
-        UUID.randomUUID(),
-        randomAlphabetic(10),
-        randomAlphabetic(50),
-        Instant.now(),
-        testUser
-    )
-
-    private fun randomCompletedTask() = Task(
-        UUID.randomUUID(),
-        randomAlphabetic(10),
-        randomAlphabetic(50),
-        Instant.now(),
-        testUser,
-        true
-    )
 
 }
