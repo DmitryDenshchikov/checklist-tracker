@@ -30,6 +30,62 @@ internal class TaskServiceImplTest : IntegrationTest {
     }
 
     @Test
+    fun should_CreateUncompletedTask_When_CorrectParamsProvided() {
+        // Given
+        val task = randomTask()
+        val taskId = task.id
+
+        // When
+        taskService.createTask(task)
+        val createdTask = taskService.getTask(taskId, testUser)
+
+        // Then
+        then(createdTask)
+            .isEqualTo(task)
+    }
+
+    @Test
+    fun should_UpdateTaskTitleAndDescription_When_NewValuesProvided() {
+        // Given
+        val task = randomTask()
+        val taskId = task.id
+
+        // When
+        taskService.createTask(task)
+
+        val taskForUpdate = with(task) {
+            Task(id, "New Test Title", "New Test Description", expirationDate, createdBy, false)
+        }
+
+        taskService.updateTask(taskForUpdate)
+        val updatedTask = taskService.getTask(taskId, testUser)
+
+        // Then
+        then(updatedTask)
+            .isEqualTo(taskForUpdate)
+    }
+
+    @Test
+    fun should_returnAllUserTasks_When_TasksCreated() {
+        // Given
+        val firstTask = randomTask()
+        val secondTask = randomTask()
+
+        // When
+        taskService.createTask(firstTask)
+        taskService.createTask(secondTask)
+
+        val tasks = taskService.getAllTasks(testUser)
+
+        // Then
+        then(tasks[0])
+            .isEqualTo(firstTask)
+
+        then(tasks[1])
+            .isEqualTo(secondTask)
+    }
+
+    @Test
     fun should_MarkTaskAsCompleted_When_TaskCreated() {
         // Given
         val task = randomTask()
@@ -100,6 +156,5 @@ internal class TaskServiceImplTest : IntegrationTest {
             .extracting("id")
             .containsExactlyInAnyOrder(firstId, secondId)
     }
-
 
 }
